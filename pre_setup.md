@@ -6,6 +6,16 @@ To use the floci services using docker
 
 docker run -d --name floci -p 4566:4566 -v /var/run/docker.sock:/var/run/docker.sock floci/floci:latest
 
+The -v flag in Docker is for volume mounting (bind mount).
+
+-v /var/run/docker.sock:/var/run/docker.sock means: map the host’s Docker socket into the container.
+
+This lets the container talk directly to the Docker daemon on your machine, so Floci can start/stop/manage other containers as if it were Docker itself.
+
+👉 Without this mount, Floci wouldn’t be able to orchestrate Docker resources.
+
+
+
 C:\Users\Alpha_320>set AWS_ENDPOINT_URL=http://localhost:4566
 
 C:\Users\Alpha_320>set AWS_ACCESS_KEY_ID=test
