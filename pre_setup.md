@@ -3,7 +3,7 @@ install docker
 
 
 To use the floci services using docker 
-
+>Running first time.
 docker run -d --name floci -p 4566:4566 -v /var/run/docker.sock:/var/run/docker.sock floci/floci:latest
 
 The -v flag in Docker is for volume mounting (bind mount).
@@ -14,7 +14,15 @@ This lets the container talk directly to the Docker daemon on your machine, so F
 
 👉 Without this mount, Floci wouldn’t be able to orchestrate Docker resources.
 
+> stop running container
+`docker stop <id>`
 
+>remove stoped container
+`docker rm <id>`
+
+>start again stoped/Exited container
+`docker restart <id>` or name
+>remove image `docker rmi <image_name>`
 
 C:\Users\Alpha_320>set AWS_ENDPOINT_URL=http://localhost:4566
 
