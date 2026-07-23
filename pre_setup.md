@@ -1,5 +1,6 @@
-Install aws cli
-install docker 
+1. Install aws cli
+
+2. install docker 
 
 
 To use the floci services using docker 
@@ -22,6 +23,7 @@ This lets the container talk directly to the Docker daemon on your machine, so F
 
 >start again stoped/Exited container
 `docker restart <id>` or name
+
 >remove image `docker rmi <image_name>`
 
 C:\Users\Alpha_320>set AWS_ENDPOINT_URL=http://localhost:4566
@@ -33,10 +35,14 @@ C:\Users\Alpha_320>set AWS_SECRET_ACCESS_KEY=test
 C:\Users\Alpha_320>set AWS_DEFAULT_REGION=us-east-1
 
 Test - 
-aws --endpoint-url=http://localhost:4566 s3 mb s3://test-bucket
-aws --endpoint-url=http://localhost:4566 s3 ls
-aws --endpoint-url=http://localhost:4566 dynamodb list-tables
-aws --endpoint-url=http://localhost:4566 lambda list-functions
+
+- `aws --endpoint-url=http://localhost:4566 s3 mb s3://test-bucket`
+
+- `aws --endpoint-url=http://localhost:4566 s3 ls`
+
+- `aws --endpoint-url=http://localhost:4566 dynamodb list-tables`
+
+- `aws --endpoint-url=http://localhost:4566 lambda list-functions`
 
 
 
