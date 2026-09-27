@@ -1,11 +1,45 @@
-1. Install aws cli
+# AWS floci setup for Terraform 
+## 1. Install aws cli
 
-2. install docker 
+## 2. install docker 
 
+### Configure aws cli in command prompt :
 
-To use the floci services using docker 
->Running first time.
-docker run -d --name floci -p 4566:4566 -v /var/run/docker.sock:/var/run/docker.sock floci/floci:latest
+`aws configure`
+```
+AWS Access Key ID [None]: test
+AWS Secret Access Key [None]: test
+Default region name [None]: us-east-1
+Default output format [None]: json
+```
+### set the endpoint:
+set --endpoint-url=http://localhost:4566
+
+### Create docker compose file
+docker-compose.yml
+
+```
+services:
+  localstack:
+    container_name: localstack-main
+    image: localstack/localstack:latest
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Edge Proxy
+      - "127.0.0.1:4510-4559:4510-4559"  # External service port range
+    environment:
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "./localstack_data:/var/lib/localstack"
+      - "//var/run/docker.sock:/var/run/docker.sock" # Double slash is required for Git Bash/Windows compatibility
+```
+
+### Run floci
+in the same path run command `docker compose up -d`
+
+or you can run below command as well.
+
+`docker run -d --name floci -p 4566:4566 -v /var/run/docker.sock:/var/run/docker.sock floci/floci:latest`
 
 The -v flag in Docker is for volume mounting (bind mount).
 
@@ -26,23 +60,17 @@ This lets the container talk directly to the Docker daemon on your machine, so F
 
 >remove image `docker rmi <image_name>`
 
-C:\Users\Alpha_320>set AWS_ENDPOINT_URL=http://localhost:4566
 
-C:\Users\Alpha_320>set AWS_ACCESS_KEY_ID=test
-
-C:\Users\Alpha_320>set AWS_SECRET_ACCESS_KEY=test
-
-C:\Users\Alpha_320>set AWS_DEFAULT_REGION=us-east-1
 
 Test - 
 
-- `aws --endpoint-url=http://localhost:4566 s3 mb s3://test-bucket`
+- `aws s3 mb s3://test-bucket`
 
-- `aws --endpoint-url=http://localhost:4566 s3 ls`
+- `aws s3 ls`
 
-- `aws --endpoint-url=http://localhost:4566 dynamodb list-tables`
+- `aws dynamodb list-tables`
 
-- `aws --endpoint-url=http://localhost:4566 lambda list-functions`
+- `aws lambda list-functions`
 
 
 
