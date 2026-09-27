@@ -6,25 +6,29 @@ HCL is a declarative configuration language.
 Files use blocks and arguments:
 
 ```markdown
-block_type "label" { ... }
+block_type "label" { 
 argument = value
-```
-Each block has a specific shape depending on the resource or provider.
-Strings are quoted: "us-east-1"
-Numbers and booleans are unquoted: 1, true
-Comments use:
-# ...
-// ...
-In Terraform specifically
-You can place:
+}
 
 ```
-terraform {} block
-provider {} block
-resource {} blocks
-variable {} blocks
-output {} blocks
-module {} blocks
+* Each block has a specific shape depending on the resource or provider.
+* Strings are quoted: "us-east-1"
+* Numbers and booleans are unquoted: 1, true
+ Comments use:
+```
+# ...
+// ...
+```
+
+In Terraform specifically below blocks with different purpose 
+
+```
+terraform {} block # To declare terraform requires version, requires providers and its version, backend
+provider {} block # To declare the provider with the region, zone, project
+resource {} blocks # To declare actual resource like , compute, storage, network, database with their configuration
+variable {} blocks # To declare the variable name, description and their default value
+output {} blocks # To display the output after apply in the console
+module {} blocks to use a local or external module.
 ```
 all in one file, or spread across many .tf files.
 
